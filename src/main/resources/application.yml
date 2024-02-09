@@ -1,1 +1,19 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
 
+debug: true
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        boot:
+          autoconfigure: error
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/db}
+      username: ${MONGO_USERNAME:changeit}
+      password: ${MONGO_PASSWORD:changeit}
