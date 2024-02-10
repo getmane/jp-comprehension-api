@@ -1,4 +1,4 @@
-package jp.comprehension.api.jpcomprehensionapi.controller;
+package jp.comprehension.api.jpcomprehensionapi.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,18 +9,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
-@Document("users")
-public class User {
+@Document("vocabs")
+public class Vocab {
 
     @Id
     private String id;
 
-    private String username;
-    private String email;
+    private String spelling;
+    private String reading;
 
     @DBRef(lazy = true)
-    private List<Vocab> vocabs;
+    private List<User> users;
 }
