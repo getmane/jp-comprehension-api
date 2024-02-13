@@ -13,12 +13,13 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Document("users")
-public class User {
+public class JpUser {
 
     @Id
     private String id;
 
     private String username;
+    private String password;
     private String email;
 
     @DBRef(lazy = true)

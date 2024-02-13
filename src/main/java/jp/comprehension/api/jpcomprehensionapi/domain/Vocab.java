@@ -22,5 +22,5 @@ public class Vocab {
     private String reading;
 
     @DBRef(lazy = true)
-    private List<User> users;
+    private List<JpUser> users;
 }
