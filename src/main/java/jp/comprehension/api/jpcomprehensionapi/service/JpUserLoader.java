@@ -1,7 +1,7 @@
 package jp.comprehension.api.jpcomprehensionapi.service;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
-import jp.comprehension.api.jpcomprehensionapi.dto.JpUserRepository;
+import jp.comprehension.api.jpcomprehensionapi.repository.JpUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
