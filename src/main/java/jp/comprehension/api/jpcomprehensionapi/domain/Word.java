@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @AllArgsConstructor
-@Document("vocabs")
-public class Vocab {
+@Document("words")
+public class Word {
 
     @Id
     private String id;
