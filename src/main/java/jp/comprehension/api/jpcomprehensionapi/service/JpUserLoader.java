@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @Service
@@ -29,11 +28,10 @@ public class JpUserLoader implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LOGGER.info("Loading user by username: {}", username);
 
-        JpUser user = userRepository.findFirstByUsername(username);
+        JpUser user = userRepository.findFirstByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Username not found: " + username)
+        );
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("USER"));
-        if (Objects.isNull(user)) {
-            throw new UsernameNotFoundException("Username not found: " + username);
-        }
         return new User(user.getUsername(), user.getPassword(),  authorities);
     }
 }

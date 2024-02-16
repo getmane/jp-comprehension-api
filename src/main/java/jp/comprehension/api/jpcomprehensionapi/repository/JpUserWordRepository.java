@@ -4,7 +4,9 @@ import jp.comprehension.api.jpcomprehensionapi.domain.JpUserWord;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface JpUserWordRepository extends MongoRepository<JpUserWord, String> {
-    JpUserWord findFirstByWordId(String wordId);
+    Optional<JpUserWord> findFirstByWordId(String wordId);
 }

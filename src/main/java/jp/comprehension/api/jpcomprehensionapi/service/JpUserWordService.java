@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,9 +27,9 @@ public class JpUserWordService {
     }
 
     private JpUserWord saveUserWord(Word word, JpUser user) {
-        JpUserWord existingUserWord
+        Optional<JpUserWord> existingUserWord
                 = jpUserVocabRepository.findFirstByWordId(word.getId());
-        if (existingUserWord == null) {
+        if (existingUserWord.isEmpty()) {
             JpUserWord newJpUserWord = JpUserWord.builder()
                     .jpUserId(user.getId())
                     .wordId(word.getId())
@@ -37,9 +38,10 @@ public class JpUserWordService {
             jpUserVocabRepository.save(newJpUserWord);
             return newJpUserWord;
         } else {
-            existingUserWord.setTimesSeen(existingUserWord.getTimesSeen() + 1);
-            jpUserVocabRepository.save(existingUserWord);
-            return existingUserWord;
+            JpUserWord existingWord = existingUserWord.get();
+            existingWord.setTimesSeen(existingWord.getTimesSeen() + 1);
+            jpUserVocabRepository.save(existingWord);
+            return existingWord;
         }
     }
 }
