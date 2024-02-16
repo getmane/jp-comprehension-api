@@ -17,4 +17,5 @@ public class Word {
 
     private String spelling;
     private String reading;
+    private String meaning;
 }
