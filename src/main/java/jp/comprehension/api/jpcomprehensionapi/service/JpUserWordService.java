@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JpUserWordService {
 
-    private final WordRepository wordRepository;
+    private final WordService wordService;
     private final JpUserWordRepository jpUserVocabRepository;
 
-    public List<JpUserWord> saveUserVocab(JpUser user, List<Word> words) {
-        // wordRepository TODO: save missing words across corpus -> save jp user words only after that
-        return words.stream().map(
+    public List<JpUserWord> saveUserVocab(JpUser user, List<Word> newWords) {
+        List<Word> savedWords = wordService.saveWords(newWords);
+
+        return savedWords.stream().map(
                 word -> saveUserWord(word, user)
         ).collect(Collectors.toList());
     }
