@@ -1,6 +1,7 @@
 package jp.comprehension.api.jpcomprehensionapi.service;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
+import jp.comprehension.api.jpcomprehensionapi.dto.CreateJpUser;
 import jp.comprehension.api.jpcomprehensionapi.repository.JpUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +21,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class JpUserLoader implements UserDetailsService {
+public class JpUserService implements UserDetailsService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JpUserLoader.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JpUserService.class);
     private final JpUserRepository userRepository;
+    private final PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -33,5 +36,14 @@ public class JpUserLoader implements UserDetailsService {
         );
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("USER"));
         return new User(user.getUsername(), user.getPassword(),  authorities);
+    }
+
+    public JpUser register(CreateJpUser newUser) {
+        JpUser user = JpUser.builder()
+                .username(newUser.getUsername())
+                .email(newUser.getEmail())
+                .password(encoder.encode(newUser.getPassword()))
+                .build();
+        return userRepository.save(user);
     }
 }
