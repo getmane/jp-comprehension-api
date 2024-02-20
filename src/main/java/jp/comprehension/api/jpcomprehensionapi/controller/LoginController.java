@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     private final JpUserService userService;
 
-    @PostMapping("/regirster")
+    @PostMapping("/register")
     public JpUser register(@RequestBody @Valid CreateJpUser newUser) {
         return userService.register(newUser);
     }
