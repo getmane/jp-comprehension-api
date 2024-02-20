@@ -2,6 +2,7 @@ package jp.comprehension.api.jpcomprehensionapi.service;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.Word;
 import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
+import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
 import jp.comprehension.api.jpcomprehensionapi.repository.WordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class WordService {
+
     private final WordRepository repository;
+    private final WordMapper mapper;
 
     public List<Word> saveWords(List<StandaloneWord> words) {
         return words.stream().map(this::saveWord).toList();
@@ -23,14 +26,6 @@ public class WordService {
                 word.getSpelling(), word.getReading(), word.getMeaning()
         );
 
-        return existingWord.orElseGet(
-                () -> repository.save(
-                        Word.builder()
-                                .meaning(word.getMeaning())
-                                .reading(word.getReading())
-                                .spelling(word.getSpelling())
-                                .build()
-                )
-        );
+        return existingWord.orElseGet(() -> repository.save(mapper.toWord(word)));
     }
 }

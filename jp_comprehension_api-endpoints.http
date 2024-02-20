@@ -1,0 +1,20 @@
+###
+POST http://localhost:8080/api/users/1/words
+Content-Type: application/json
+
+[
+  {
+    "spelling": "test",
+    "meaning": "test",
+    "reading": "test"
+  },
+  {
+    "spelling": "test2",
+    "meaning": "test2",
+    "reading": "test2"
+  }
+]
+
+###
+GET http://localhost:8080/api/users/1/words
+Accept: application/json
