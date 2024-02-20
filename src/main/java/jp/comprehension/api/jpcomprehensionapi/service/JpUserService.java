@@ -46,4 +46,10 @@ public class JpUserService implements UserDetailsService {
                 .build();
         return userRepository.save(user);
     }
+
+    public JpUser getUserById(String userId) {
+        return this.userRepository.findFirstById(userId).orElseThrow(
+                () -> new IllegalArgumentException("User not found id: " + userId)
+        );
+    }
 }

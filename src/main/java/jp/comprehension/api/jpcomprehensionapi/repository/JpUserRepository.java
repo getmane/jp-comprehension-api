@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface JpUserRepository extends MongoRepository<JpUser, String> {
     Optional<JpUser> findFirstByUsername(String email);
+
+    Optional<JpUser> findFirstById(String id);
 }

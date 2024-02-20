@@ -3,6 +3,7 @@ package jp.comprehension.api.jpcomprehensionapi.service;
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUserWord;
 import jp.comprehension.api.jpcomprehensionapi.domain.Word;
+import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
 import jp.comprehension.api.jpcomprehensionapi.repository.JpUserWordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,17 +18,17 @@ public class JpUserWordService {
 
     private final WordService wordService;
     private final JpUserWordRepository jpUserVocabRepository;
+    private final JpUserService userService;
 
     public List<JpUserWord> getUserWords(String userId) {
         return this.jpUserVocabRepository.findAllByJpUserId(userId);
     }
 
-    public List<JpUserWord> saveUserWords(JpUser user, List<Word> newWords) {
+    public List<JpUserWord> saveUserWords(String userId, List<StandaloneWord> newWords) {
         List<Word> savedWords = wordService.saveWords(newWords);
+        JpUser user = userService.getUserById(userId);
 
-        return savedWords.stream().map(
-                word -> saveUserWord(word, user)
-        ).collect(Collectors.toList());
+        return savedWords.stream().map(word -> saveUserWord(word, user)).collect(Collectors.toList());
     }
 
     private JpUserWord saveUserWord(Word word, JpUser user) {
