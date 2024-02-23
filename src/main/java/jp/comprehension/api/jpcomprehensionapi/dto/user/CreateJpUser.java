@@ -1,4 +1,4 @@
-package jp.comprehension.api.jpcomprehensionapi.dto;
+package jp.comprehension.api.jpcomprehensionapi.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
