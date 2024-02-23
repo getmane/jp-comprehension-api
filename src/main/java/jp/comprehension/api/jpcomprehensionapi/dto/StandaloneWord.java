@@ -10,5 +10,4 @@ import lombok.Setter;
 public class StandaloneWord {
     private String spelling;
     private String reading;
-    private String meaning;
 }

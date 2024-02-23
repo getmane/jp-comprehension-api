@@ -1,23 +1,21 @@
 ###
-POST http://localhost:8080/api/users/1/words
+POST http://localhost:8080/api/user/immersion-words
 Content-Type: application/json
 Authorization: Basic user password
 
 [
   {
     "spelling": "test",
-    "meaning": "test",
     "reading": "test"
   },
   {
     "spelling": "test2",
-    "meaning": "test2",
     "reading": "test2"
   }
 ]
 
 ###
-GET http://localhost:8080/api/users/1/words
+GET http://localhost:8080/api/user/1/words
 Accept: application/json
 Authorization: Basic user2 password
 
