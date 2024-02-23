@@ -2,6 +2,7 @@ package jp.comprehension.api.jpcomprehensionapi.config;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
 import jp.comprehension.api.jpcomprehensionapi.repository.JpUserRepository;
+import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,16 +17,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ManualAuthProvider implements AuthenticationProvider {
 
-    private final JpUserRepository userRepository;
+    private final JpUserService userService;
     private final PasswordEncoder encoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
-        JpUser user = userRepository.findFirstByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Username not found: " + username)
-        );
+        JpUser user = userService.getUserByUsername(username);
         if (!encoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Passwords don't match");
         }

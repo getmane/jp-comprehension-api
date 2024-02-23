@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface JpUserWordRepository extends MongoRepository<JpUserWord, String> {
-    Optional<JpUserWord> findFirstByWordId(String wordId);
+    Optional<JpUserWord> findFirstByWordIdAndJpUserId(String wordId, String jpUserId);
 
     List<JpUserWord> findAllByJpUserId(String jpUserId);
 }

@@ -22,8 +22,8 @@ public class WordService {
     }
 
     public Word saveWord(StandaloneWord word) {
-        Optional<Word> existingWord = repository.findFirstBySpellingAndReadingAndMeaning(
-                word.getSpelling(), word.getReading(), word.getMeaning()
+        Optional<Word> existingWord = repository.findFirstBySpellingAndReading(
+                word.getSpelling(), word.getReading()
         );
 
         return existingWord.orElseGet(() -> repository.save(mapper.toWord(word)));

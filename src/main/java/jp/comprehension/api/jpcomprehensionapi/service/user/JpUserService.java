@@ -1,7 +1,7 @@
-package jp.comprehension.api.jpcomprehensionapi.service;
+package jp.comprehension.api.jpcomprehensionapi.service.user;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
-import jp.comprehension.api.jpcomprehensionapi.dto.CreateJpUser;
+import jp.comprehension.api.jpcomprehensionapi.dto.user.CreateJpUser;
 import jp.comprehension.api.jpcomprehensionapi.repository.JpUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,9 +24,9 @@ public class JpUserService {
         return userRepository.save(user);
     }
 
-    public JpUser getUserById(String userId) {
-        return this.userRepository.findFirstById(userId).orElseThrow(
-                () -> new IllegalArgumentException("User not found id: " + userId)
+    public JpUser getUserByUsername(String username) {
+        return this.userRepository.findFirstByUsername(username).orElseThrow(
+                () -> new IllegalArgumentException("User not found username: " + username)
         );
     }
 }
