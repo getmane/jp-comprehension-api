@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,5 +21,5 @@ public class Word {
 
     private String spelling;
     private String reading;
-    private String meaning;
+    private List<String> meanings;
 }
