@@ -1,6 +1,7 @@
 ###
 POST http://localhost:8080/api/users/1/words
 Content-Type: application/json
+Authorization: Basic user password
 
 [
   {
@@ -18,3 +19,14 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/users/1/words
 Accept: application/json
+Authorization: Basic user2 password
+
+###
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "password",
+  "email": "email@email.com"
+}
