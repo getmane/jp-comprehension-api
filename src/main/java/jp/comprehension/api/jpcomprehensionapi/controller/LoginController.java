@@ -2,8 +2,8 @@ package jp.comprehension.api.jpcomprehensionapi.controller;
 
 import jakarta.validation.Valid;
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
-import jp.comprehension.api.jpcomprehensionapi.dto.CreateJpUser;
-import jp.comprehension.api.jpcomprehensionapi.service.JpUserService;
+import jp.comprehension.api.jpcomprehensionapi.dto.user.CreateJpUser;
+import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
