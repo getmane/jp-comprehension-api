@@ -26,7 +26,7 @@ public class JpUserController {
 
     @GetMapping("/words")
     public List<JpUserWord> getUserWords(@AuthenticationPrincipal String username) {
-        return this.userWordService.getUserWords(username);
+        return this.userWordService.getAllUserWords(username);
     }
 
     @PostMapping("/immersion-words")
@@ -34,7 +34,7 @@ public class JpUserController {
             @AuthenticationPrincipal String username,
             @RequestBody List<StandaloneWord> words
     ) {
-        return this.userWordService.saveImmersionWordsProgress(username, words);
+        return this.userWordService.saveImmersionWords(username, words);
     }
 
     @PostMapping("/jpdb-import")

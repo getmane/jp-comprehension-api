@@ -24,7 +24,7 @@ public class JpdbImportService {
         try {
             Jpdb jpdb = GSON.fromJson(new String(file.getBytes()), Jpdb.class);
             return new JpdbImportStat(
-                    userWordService.saveKnownWords(
+                    userWordService.saveReviewWords(
                             username,
                             wordMapper.jpdbToStandalone(jpdb.getCardsVocabularyJpEn())
                     ).size()

@@ -21,49 +21,50 @@ public class JpUserWordService {
     private final JpUserWordRepository jpUserVocabRepository;
     private final JpUserService userService;
 
-    public List<JpUserWord> getUserWords(String username) {
+    public List<JpUserWord> getAllUserWords(String username) {
         JpUser user = userService.getUserByUsername(username);
         return this.jpUserVocabRepository.findAllByJpUserId(user.getId());
     }
 
-    public List<JpUserWord> saveKnownWords(String username, List<StandaloneWord> knownWords) {
+    public List<JpUserWord> saveReviewWords(String username, List<StandaloneWord> knownWords) {
         List<Word> savedWords = wordService.saveWords(knownWords);
         JpUser user = userService.getUserByUsername(username);
 
-        return savedWords.stream().map(word -> saveKnownWord(word, user))
+        return savedWords.stream().map(word -> saveNewWord(word, user))
                 .filter(Objects::nonNull)
                 .toList();
     }
 
-    public List<JpUserWord> saveImmersionWordsProgress(String username, List<StandaloneWord> newWords) {
-        List<Word> savedWords = wordService.saveWords(newWords);
+    public List<JpUserWord> saveImmersionWords(String username, List<StandaloneWord> words) {
+        List<Word> savedWords = wordService.saveWords(words);
         JpUser user = userService.getUserByUsername(username);
 
-        return savedWords.stream().map(word -> saveImmersionWordProgress(word, user))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+        return savedWords.stream()
+                .map(word -> saveImmersionWord(word, user))
                 .toList();
     }
 
-    private JpUserWord saveKnownWord(Word word, JpUser user) {
+    private JpUserWord saveImmersionWord(Word word, JpUser user) {
+        Optional<JpUserWord> existingUserWord
+                = jpUserVocabRepository.findFirstByWordIdAndJpUserId(word.getId(), user.getId());
+        return existingUserWord.map(this::advanceWordProgress)
+                .orElse(this.saveNewWord(word, user));
+    }
+
+    private JpUserWord advanceWordProgress(JpUserWord existingWord) {
+        existingWord.setTimesSeen(existingWord.getTimesSeen() + 1);
+        return jpUserVocabRepository.save(existingWord);
+    }
+
+    private JpUserWord saveNewWord(Word word, JpUser user) {
         Optional<JpUserWord> existingUserWord
                 = jpUserVocabRepository.findFirstByWordIdAndJpUserId(word.getId(), user.getId());
         return existingUserWord.isEmpty()
                 ? jpUserVocabRepository.save(
-                JpUserWord.builder()
-                        .wordId(word.getId())
-                        .jpUserId(user.getId()).timesSeen(0L)
-                        .build())
+                        JpUserWord.builder()
+                                .wordId(word.getId())
+                                .jpUserId(user.getId()).timesSeen(0L)
+                                .build())
                 : null;
-    }
-
-    private Optional<JpUserWord> saveImmersionWordProgress(Word word, JpUser user) {
-        Optional<JpUserWord> existingUserWord
-                = jpUserVocabRepository.findFirstByWordIdAndJpUserId(word.getId(), user.getId());
-        return existingUserWord.map(existingWord -> {
-            existingWord.setTimesSeen(existingWord.getTimesSeen() + 1);
-            jpUserVocabRepository.save(existingWord);
-            return existingWord;
-        });
     }
 }
