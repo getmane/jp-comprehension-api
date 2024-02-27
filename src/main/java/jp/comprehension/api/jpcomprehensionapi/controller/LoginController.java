@@ -3,6 +3,7 @@ package jp.comprehension.api.jpcomprehensionapi.controller;
 import jakarta.validation.Valid;
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
 import jp.comprehension.api.jpcomprehensionapi.dto.user.CreateJpUser;
+import jp.comprehension.api.jpcomprehensionapi.dto.user.UserCreated;
 import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ public class LoginController {
     private final JpUserService userService;
 
     @PostMapping("/register")
-    public JpUser register(@RequestBody @Valid CreateJpUser newUser) {
+    public UserCreated register(@RequestBody @Valid CreateJpUser newUser) {
         return userService.register(newUser);
     }
 }

@@ -1,7 +1,7 @@
 package jp.comprehension.api.jpcomprehensionapi.service.user.jpdb;
 
 import com.google.gson.Gson;
-import jp.comprehension.api.jpcomprehensionapi.dto.user.jpdb.JpdbImportStat;
+import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.JpdbImportStat;
 import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
 import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserWordService;
 import jp.comprehension.api.jpcomprehensionapi.vocab.jpdb.Jpdb;

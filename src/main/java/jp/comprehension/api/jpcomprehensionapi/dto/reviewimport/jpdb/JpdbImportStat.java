@@ -1,4 +1,4 @@
-package jp.comprehension.api.jpcomprehensionapi.dto.user.jpdb;
+package jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

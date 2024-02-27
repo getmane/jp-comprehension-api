@@ -16,3 +16,4 @@ spring:
     mongodb:
       database: ${MONGO_DB:changeit}
       port: ${MONGO_PORT:27017}
+      auto-index-creation: true

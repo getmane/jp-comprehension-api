@@ -21,8 +21,9 @@ public class JpUserWordService {
     private final JpUserWordRepository jpUserVocabRepository;
     private final JpUserService userService;
 
-    public List<JpUserWord> getUserWords(String userId) {
-        return this.jpUserVocabRepository.findAllByJpUserId(userId);
+    public List<JpUserWord> getUserWords(String username) {
+        JpUser user = userService.getUserByUsername(username);
+        return this.jpUserVocabRepository.findAllByJpUserId(user.getId());
     }
 
     public List<JpUserWord> saveKnownWords(String username, List<StandaloneWord> knownWords) {
