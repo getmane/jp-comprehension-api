@@ -63,7 +63,8 @@ public class JpUserWordService {
                 ? jpUserVocabRepository.save(
                         JpUserWord.builder()
                                 .wordId(word.getId())
-                                .jpUserId(user.getId()).timesSeen(0L)
+                                .jpUserId(user.getId())
+                                .timesSeen(0L)
                                 .build())
                 : null;
     }
