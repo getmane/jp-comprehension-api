@@ -4,7 +4,7 @@ import jp.comprehension.api.jpcomprehensionapi.domain.JpUserWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.JpdbImportStat;
 import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserWordService;
-import jp.comprehension.api.jpcomprehensionapi.service.user.jpdb.JpdbImportService;
+import jp.comprehension.api.jpcomprehensionapi.service.reviewimport.jpdb.JpdbImportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

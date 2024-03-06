@@ -11,5 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class JpdbImportStat {
 
+    private String filename;
     private Integer wordsAdded;
 }

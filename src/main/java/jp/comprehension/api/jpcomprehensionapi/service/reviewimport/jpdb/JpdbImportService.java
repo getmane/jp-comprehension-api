@@ -1,4 +1,4 @@
-package jp.comprehension.api.jpcomprehensionapi.service.user.jpdb;
+package jp.comprehension.api.jpcomprehensionapi.service.reviewimport.jpdb;
 
 import com.google.gson.Gson;
 import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.JpdbImportStat;
@@ -24,6 +24,7 @@ public class JpdbImportService {
         try {
             Jpdb jpdb = GSON.fromJson(new String(file.getBytes()), Jpdb.class);
             return new JpdbImportStat(
+                    file.getName(),
                     userWordService.saveReviewWords(
                             username,
                             wordMapper.jpdbToStandalone(jpdb.getCardsVocabularyJpEn())

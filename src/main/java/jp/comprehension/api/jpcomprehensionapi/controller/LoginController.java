@@ -1,7 +1,6 @@
 package jp.comprehension.api.jpcomprehensionapi.controller;
 
 import jakarta.validation.Valid;
-import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
 import jp.comprehension.api.jpcomprehensionapi.dto.user.CreateJpUser;
 import jp.comprehension.api.jpcomprehensionapi.dto.user.UserCreated;
 import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserService;
