@@ -117,40 +117,6 @@ class JpUserWordServiceTest {
         assertThat(resultWords).containsExactlyInAnyOrderElementsOf(List.of(expectedNewSavedReviewWord));
     }
 
-//    @ParameterizedTest
-//    @MethodSource("postTestSource")
-//    void testPostJpUserWordService(
-//            List<StandaloneWord> reviewWordsToSave,
-//            List<JpUserWord> existingUserWords,
-//            List<JpUserWord> expectedSavedUserWords
-//    ) {
-//        // Given
-//        when(jpUserService.getUserByUsername(TEST_USER.getUsername())).thenReturn(TEST_USER);
-//
-//        List<Word> existingWords = reviewWordsToSave.stream().map(
-//                standaloneWord -> new Word(
-//                        String.valueOf(RANDOM.nextInt()),
-//                        standaloneWord.getSpelling(),
-//                        standaloneWord.getReading(),
-//                        List.of()
-//                )
-//        ).toList();
-//
-//        when(wordService.saveWords(reviewWordsToSave)).thenReturn(existingWords);
-//
-//        when(jpUserWordRepository.findFirstByWordIdAndJpUserId(any(String.class), eq(TEST_USER.getId())))
-//                .thenAnswer(invocation -> existingUserWords);
-//
-//        when(jpUserWordRepository.save(any(JpUserWord.class)))
-//                .thenAnswer(invocation -> invocation..expectedSavedUserWords);
-//
-//        // When
-//        List<JpUserWord> resultWords = jpUserWordService.saveReviewWords(TEST_USER.getUsername(), reviewWordsToSave);
-//
-//        // Then
-//        assertThat(resultWords).containsExactlyInAnyOrderElementsOf(expectedSavedUserWords);
-//    }
-
     private static Stream<Arguments> postTestSource() {
         return Stream.of(
                 Arguments.of(Named.of("New review word",
