@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/users/{username}/immersion", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/immersion", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserImmersionController {
     private final UserImmersionService userWordService;
 

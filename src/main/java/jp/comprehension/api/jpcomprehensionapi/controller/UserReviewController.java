@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/users/{username}/review", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/review", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserReviewController {
     private final JpdbImportService jpdbImportService;
 
