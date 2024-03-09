@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document("jp_users_words")
-public class JpUserWord {
+public class UserWord {
 
     @Id
     private String id;

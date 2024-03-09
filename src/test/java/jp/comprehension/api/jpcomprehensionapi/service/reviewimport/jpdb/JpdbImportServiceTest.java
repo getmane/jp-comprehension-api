@@ -1,9 +1,9 @@
 package jp.comprehension.api.jpcomprehensionapi.service.reviewimport.jpdb;
 
-import jp.comprehension.api.jpcomprehensionapi.domain.JpUserWord;
+import jp.comprehension.api.jpcomprehensionapi.domain.UserWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.JpdbImportStat;
 import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
-import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserWordService;
+import jp.comprehension.api.jpcomprehensionapi.service.user.UserReviewService;
 import jp.comprehension.api.jpcomprehensionapi.vocab.jpdb.JpdbWord;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ class JpdbImportServiceTest {
     private static final String USERNAME = "user";
 
     @Mock
-    private JpUserWordService jpUserWordService;
+    private UserReviewService jpUserWordService;
 
     @Spy
     private WordMapper wordMapper;
@@ -49,8 +49,8 @@ class JpdbImportServiceTest {
                 """.formatted(reviewWord.reading(), reviewWord.spelling()).getBytes()
         );
 
-        when(jpUserWordService.saveReviewWords(USERNAME, wordMapper.jpdbToStandalone(List.of(reviewWord))))
-                .thenReturn(List.of(new JpUserWord()));
+        when(jpUserWordService.saveWords(USERNAME, wordMapper.jpdbToStandalone(List.of(reviewWord))))
+                .thenReturn(List.of(new UserWord()));
 
         // When
         JpdbImportStat resultStat = importService.importJpdbReviews(USERNAME, jpdb);

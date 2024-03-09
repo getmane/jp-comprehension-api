@@ -1,12 +1,13 @@
 package jp.comprehension.api.jpcomprehensionapi.service.user;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
-import jp.comprehension.api.jpcomprehensionapi.domain.JpUserWord;
+import jp.comprehension.api.jpcomprehensionapi.domain.UserWord;
 import jp.comprehension.api.jpcomprehensionapi.domain.Word;
 import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
 import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
-import jp.comprehension.api.jpcomprehensionapi.repository.JpUserWordRepository;
+import jp.comprehension.api.jpcomprehensionapi.repository.UserWordRepository;
 import jp.comprehension.api.jpcomprehensionapi.service.WordService;
+import jp.comprehension.api.jpcomprehensionapi.service.login.UserService;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,59 +25,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith({MockitoExtension.class})
-class JpUserWordServiceTest {
+class UserReviewServiceTest {
 
     private static final JpUser TEST_USER = new JpUser("1", "test", "test", "test");
 
     @Mock
-    private JpUserWordRepository jpUserWordRepository;
+    private UserWordRepository userWordRepository;
 
     @Mock
     private WordService wordService;
 
     @Mock
-    private JpUserService jpUserService;
+    private UserService userService;
 
     @Spy
     private WordMapper wordMapper;
 
     @InjectMocks
-    private JpUserWordService jpUserWordService;
-
-    @Test
-    void testGetAllUserWords() {
-        // Given
-        when(jpUserService.getUserByUsername(TEST_USER.getUsername())).thenReturn(TEST_USER);
-
-        List<JpUserWord> expectedWords = List.of(new JpUserWord("1", "1", "1", 1L));
-        when(jpUserWordRepository.findAllByJpUserId(TEST_USER.getId())).thenReturn(expectedWords);
-
-        // When
-        List<JpUserWord> resultWords = jpUserWordService.getAllUserWords(TEST_USER.getUsername());
-
-        // Then
-        assertThat(resultWords).containsExactlyInAnyOrderElementsOf(expectedWords);
-    }
+    private UserReviewService reviewService;
 
     @Test
     void testSaveReviewWord_SameWordExists_ReviewWordExist() {
         // Given
-        when(jpUserService.getUserByUsername(TEST_USER.getUsername())).thenReturn(TEST_USER);
+        when(userService.getUserByUsername(TEST_USER.getUsername())).thenReturn(TEST_USER);
 
         StandaloneWord newReviewWordToSave = new StandaloneWord("test_spel", "test_read");
 
         Word existingWord = new Word(
                 "1", newReviewWordToSave.getSpelling(), newReviewWordToSave.getReading(), List.of()
         );
-        JpUserWord existingReviewWord = new JpUserWord("1", TEST_USER.getId(), existingWord.getId(), 0L);
+        UserWord existingReviewWord = new UserWord("1", TEST_USER.getId(), existingWord.getId(), 0L);
 
         when(wordService.saveWords(List.of(newReviewWordToSave))).thenReturn(List.of(existingWord));
 
-        when(jpUserWordRepository.findFirstByWordIdAndJpUserId(existingWord.getId(), TEST_USER.getId()))
+        when(userWordRepository.findFirstByWordIdAndJpUserId(existingWord.getId(), TEST_USER.getId()))
                 .thenReturn(Optional.of(existingReviewWord));
 
         // When
-        List<JpUserWord> resultWords = jpUserWordService.saveReviewWords(
+        List<UserWord> resultWords = reviewService.saveWords(
                 TEST_USER.getUsername(), List.of(newReviewWordToSave)
         );
 
@@ -87,21 +73,21 @@ class JpUserWordServiceTest {
     @Test
     void testSaveReviewWord_SameWordExists_ReviewWordAbsent() {
         // Given
-        when(jpUserService.getUserByUsername(TEST_USER.getUsername())).thenReturn(TEST_USER);
+        when(userService.getUserByUsername(TEST_USER.getUsername())).thenReturn(TEST_USER);
 
         StandaloneWord newReviewWordToSave = new StandaloneWord("test_spel", "test_read");
 
         Word existingWord = new Word(
                 "1", newReviewWordToSave.getSpelling(), newReviewWordToSave.getReading(), List.of()
         );
-        JpUserWord expectedNewSavedReviewWord = new JpUserWord("1", TEST_USER.getId(), existingWord.getId(), 0L);
+        UserWord expectedNewSavedReviewWord = new UserWord("1", TEST_USER.getId(), existingWord.getId(), 0L);
 
         when(wordService.saveWords(List.of(newReviewWordToSave))).thenReturn(List.of(existingWord));
 
-        when(jpUserWordRepository.findFirstByWordIdAndJpUserId(existingWord.getId(), TEST_USER.getId()))
+        when(userWordRepository.findFirstByWordIdAndJpUserId(existingWord.getId(), TEST_USER.getId()))
                 .thenReturn(Optional.empty());
 
-        when(jpUserWordRepository.save(JpUserWord.builder()
+        when(userWordRepository.save(UserWord.builder()
                 .wordId(existingWord.getId())
                 .jpUserId(TEST_USER.getId())
                 .timesSeen(0L)
@@ -109,20 +95,11 @@ class JpUserWordServiceTest {
         ).thenReturn(expectedNewSavedReviewWord);
 
         // When
-        List<JpUserWord> resultWords = jpUserWordService.saveReviewWords(
+        List<UserWord> resultWords = reviewService.saveWords(
                 TEST_USER.getUsername(), List.of(newReviewWordToSave)
         );
 
         // Then
         assertThat(resultWords).containsExactlyInAnyOrderElementsOf(List.of(expectedNewSavedReviewWord));
-    }
-
-    private static Stream<Arguments> postTestSource() {
-        return Stream.of(
-                Arguments.of(Named.of("New review word",
-                                List.of(new StandaloneWord("test_spel", "test_read"))),
-                        List.of(new JpUserWord("1", TEST_USER.getId(), "1", 0L))
-                )
-        );
     }
 }

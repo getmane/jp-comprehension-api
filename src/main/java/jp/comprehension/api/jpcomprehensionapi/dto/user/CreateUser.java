@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateJpUser {
+public class CreateUser {
 
     @NotBlank
     private String username;

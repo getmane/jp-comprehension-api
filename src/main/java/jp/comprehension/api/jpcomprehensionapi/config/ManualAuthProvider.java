@@ -1,7 +1,7 @@
 package jp.comprehension.api.jpcomprehensionapi.config;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
-import jp.comprehension.api.jpcomprehensionapi.service.user.JpUserService;
+import jp.comprehension.api.jpcomprehensionapi.service.login.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ManualAuthProvider implements AuthenticationProvider {
 
-    private final JpUserService userService;
+    private final UserService userService;
     private final PasswordEncoder encoder;
 
     @Override

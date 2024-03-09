@@ -3,9 +3,9 @@ package jp.comprehension.api.jpcomprehensionapi.exception;
 
 import org.springframework.dao.DuplicateKeyException;
 
-public class JpUserCreateException extends DuplicateKeyException {
+public class UserCreateException extends DuplicateKeyException {
 
-    public JpUserCreateException(String msg) {
+    public UserCreateException(String msg) {
         super(msg);
     }
 }

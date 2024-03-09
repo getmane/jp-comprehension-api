@@ -9,13 +9,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
-public class JpUserExceptionHandler extends ResponseEntityExceptionHandler {
+public class UserExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String USER_NOT_CREATED = "Couldn't create user. The username already exists";
 
-    @ExceptionHandler(value = {JpUserCreateException.class})
+    @ExceptionHandler(value = {UserCreateException.class})
     protected ResponseEntity<Object> handleUserCreateException(
-            JpUserCreateException ex, WebRequest request
+            UserCreateException ex, WebRequest request
     ) {
         return handleExceptionInternal(ex, USER_NOT_CREATED, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
