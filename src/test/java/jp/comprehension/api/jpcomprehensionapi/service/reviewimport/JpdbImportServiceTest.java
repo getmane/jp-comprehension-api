@@ -1,7 +1,7 @@
-package jp.comprehension.api.jpcomprehensionapi.service.reviewimport.jpdb;
+package jp.comprehension.api.jpcomprehensionapi.service.reviewimport;
 
 import jp.comprehension.api.jpcomprehensionapi.domain.UserWord;
-import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.JpdbImportStat;
+import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.ImportStat;
 import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
 import jp.comprehension.api.jpcomprehensionapi.service.user.UserReviewService;
 import jp.comprehension.api.jpcomprehensionapi.vocab.jpdb.JpdbWord;
@@ -53,7 +53,7 @@ class JpdbImportServiceTest {
                 .thenReturn(List.of(new UserWord()));
 
         // When
-        JpdbImportStat resultStat = importService.importJpdbReviews(USERNAME, jpdb);
+        ImportStat resultStat = importService.importReviews(USERNAME, jpdb);
 
         // Then
         assertThat(resultStat.getFilename()).isEqualTo(jpdb.getName());

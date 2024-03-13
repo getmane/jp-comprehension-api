@@ -11,12 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserReviewService implements UserWordService{
+public class UserReviewService implements UserWordService {
 
     private final WordService wordService;
     private final UserWordRepository jpUserVocabRepository;

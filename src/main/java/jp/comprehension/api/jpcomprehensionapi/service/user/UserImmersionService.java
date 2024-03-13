@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserImmersionService implements UserWordService{
+public class UserImmersionService implements UserWordService {
 
     private final WordService wordService;
     private final UserWordRepository jpUserVocabRepository;
