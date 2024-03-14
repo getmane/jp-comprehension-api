@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ImportStat {
 
-    private String filename;
+    private String description;
     private Integer wordsAdded;
 }
