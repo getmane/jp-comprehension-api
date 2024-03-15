@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class LoginController {
+
     private final UserService userService;
 
     @PostMapping("/register")

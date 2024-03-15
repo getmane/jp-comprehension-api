@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/immersion", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserImmersionController {
+
     private final UserImmersionService userWordService;
 
     @GetMapping("/words")
