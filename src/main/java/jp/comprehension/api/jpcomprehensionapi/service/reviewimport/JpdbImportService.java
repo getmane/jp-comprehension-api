@@ -13,14 +13,13 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class JpdbImportService implements ImportService {
+public class JpdbImportService {
 
     private static final Gson GSON = new Gson();
 
     private final UserReviewService userReviewService;
     private final WordMapper wordMapper;
 
-    @Override
     public ImportStat importReviews(String username, MultipartFile file) {
         try {
             Jpdb jpdb = GSON.fromJson(new String(file.getBytes()), Jpdb.class);

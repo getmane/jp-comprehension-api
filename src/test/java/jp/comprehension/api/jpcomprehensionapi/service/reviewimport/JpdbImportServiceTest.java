@@ -56,7 +56,7 @@ class JpdbImportServiceTest {
         ImportStat resultStat = importService.importReviews(USERNAME, jpdb);
 
         // Then
-        assertThat(resultStat.getFilename()).isEqualTo(jpdb.getName());
+        assertThat(resultStat.getDescription()).isEqualTo(jpdb.getName());
         assertThat(resultStat.getWordsAdded()).isEqualTo(1);
     }
 }
