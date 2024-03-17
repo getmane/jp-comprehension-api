@@ -3,7 +3,7 @@ package jp.comprehension.api.jpcomprehensionapi.controller;
 import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.ImportStat;
 import jp.comprehension.api.jpcomprehensionapi.service.reviewimport.JpdbImportService;
-import jp.comprehension.api.jpcomprehensionapi.service.reviewimport.StandaloneReviewService;
+import jp.comprehension.api.jpcomprehensionapi.service.reviewimport.StandaloneImportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +20,7 @@ import java.util.List;
 public class UserReviewController {
 
     private final JpdbImportService jpdbImportService;
-    private final StandaloneReviewService standaloneReviewService;
+    private final StandaloneImportService standaloneImportService;
 
     @PostMapping("/jpdb-import")
     public ImportStat importJpdbReviews(
@@ -35,6 +35,6 @@ public class UserReviewController {
             @AuthenticationPrincipal String username,
             List<StandaloneWord> reviewWords
     ) {
-        return this.standaloneReviewService.importReviews(username, reviewWords);
+        return this.standaloneImportService.importReviews(username, reviewWords);
     }
 }

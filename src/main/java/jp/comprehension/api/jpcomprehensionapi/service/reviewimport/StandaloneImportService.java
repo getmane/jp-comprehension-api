@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class StandaloneReviewService {
+public class StandaloneImportService {
 
     private static final String STANDALONE_IMPORT_DESCRIPTION = "STANDALONE";
 
