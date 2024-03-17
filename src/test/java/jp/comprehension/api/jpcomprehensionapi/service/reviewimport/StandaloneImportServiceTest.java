@@ -27,7 +27,7 @@ class StandaloneImportServiceTest {
     private StandaloneImportService importService;
 
     @Test
-    void testImportJpdbReviews() {
+    void testStandaloneImportReviews() {
         // Given
         StandaloneWord reviewWord = new StandaloneWord("気分", "きぶん");
 
