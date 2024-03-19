@@ -1,4 +1,4 @@
-package jp.comprehension.api.jpcomprehensionapi.controller;
+package jp.comprehension.api.jpcomprehensionapi.web;
 
 import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.ImportStat;

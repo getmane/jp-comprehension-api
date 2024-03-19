@@ -1,4 +1,4 @@
-package jp.comprehension.api.jpcomprehensionapi.controller;
+package jp.comprehension.api.jpcomprehensionapi.web;
 
 import jakarta.validation.Valid;
 import jp.comprehension.api.jpcomprehensionapi.dto.user.CreateUser;
