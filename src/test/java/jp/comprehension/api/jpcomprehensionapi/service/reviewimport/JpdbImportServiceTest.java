@@ -5,6 +5,7 @@ import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.ImportStat;
 import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
 import jp.comprehension.api.jpcomprehensionapi.service.user.UserReviewService;
 import jp.comprehension.api.jpcomprehensionapi.vocab.jpdb.JpdbWord;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,8 +30,12 @@ class JpdbImportServiceTest {
     @Spy
     private WordMapper wordMapper;
 
-    @InjectMocks
     private JpdbImportService importService;
+
+    @BeforeEach
+    void setUp() {
+        importService = new JpdbImportService(jpUserWordService, wordMapper);
+    }
 
     @Test
     void testImportJpdbReviews() {

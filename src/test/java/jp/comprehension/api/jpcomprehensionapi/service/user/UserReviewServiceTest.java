@@ -8,18 +8,15 @@ import jp.comprehension.api.jpcomprehensionapi.map.WordMapper;
 import jp.comprehension.api.jpcomprehensionapi.repository.UserWordRepository;
 import jp.comprehension.api.jpcomprehensionapi.service.WordService;
 import jp.comprehension.api.jpcomprehensionapi.service.login.UserService;
-import org.junit.jupiter.api.Named;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.provider.Arguments;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -41,8 +38,12 @@ class UserReviewServiceTest {
     @Spy
     private WordMapper wordMapper;
 
-    @InjectMocks
     private UserReviewService reviewService;
+
+    @BeforeEach
+    void setUp() {
+        reviewService = new UserReviewService(wordService, userWordRepository, userService);
+    }
 
     @Test
     void testSaveReviewWord_SameWordExists_ReviewWordExist() {

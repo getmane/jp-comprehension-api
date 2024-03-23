@@ -4,6 +4,7 @@ import jp.comprehension.api.jpcomprehensionapi.domain.UserWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.StandaloneWord;
 import jp.comprehension.api.jpcomprehensionapi.dto.reviewimport.jpdb.ImportStat;
 import jp.comprehension.api.jpcomprehensionapi.service.user.UserReviewService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,8 +24,12 @@ class StandaloneImportServiceTest {
     @Mock
     private UserReviewService jpUserWordService;
 
-    @InjectMocks
     private StandaloneImportService importService;
+
+    @BeforeEach
+    void setUp() {
+        importService = new StandaloneImportService(jpUserWordService);
+    }
 
     @Test
     void testStandaloneImportReviews() {
