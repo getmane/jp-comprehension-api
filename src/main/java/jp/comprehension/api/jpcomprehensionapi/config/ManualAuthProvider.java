@@ -1,7 +1,7 @@
 package jp.comprehension.api.jpcomprehensionapi.config;
 
-import jp.comprehension.api.jpcomprehensionapi.domain.JpUser;
-import jp.comprehension.api.jpcomprehensionapi.service.login.UserService;
+import jp.comprehension.api.jpcomprehensionapi.user.domain.JpUser;
+import jp.comprehension.api.jpcomprehensionapi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
